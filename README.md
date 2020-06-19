@@ -2,7 +2,7 @@
 
 Clone this repo into your home directory.
 
-`git clone _______`
+`git clone https://github.com/hdmamin/.dotfiles.git`
 
 Install GNU-stow for dotfile management.
 
