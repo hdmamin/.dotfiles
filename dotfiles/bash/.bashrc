@@ -60,10 +60,8 @@ bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 txtrst='\e[0m'    # Text Reset - Useful for avoiding color bleed
 
+# Sets prompt colors and information.
 export PS1="\[$bldblu\]\u@\h \[$bldgrn\]\w\[$txtblu\]\$(parse_git_branch) $ \[$txtrst\]"
-
-# Use `config` command like `git` to help deal with bare repo ~/dotfiles. 
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # Allow vim bindings in bash. Use "shopt -os vi" to unset.
 set -o vi
@@ -189,5 +187,13 @@ tmux_gpu_session() {
         # Open in work window.
         tmux select-window -t main:1
         tmux attach -t main
+}
+
+pylog() {
+        # Prints stdout and also saves output to a file.
+        # Arg 1: python script to run
+        # Arg 2: Log file to save stdout to.
+        # Ex: pylog myscript.py data/logs/train.log
+        python -u $1 2>&1 | tee $2
 }
 
