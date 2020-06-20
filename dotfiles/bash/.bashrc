@@ -1,6 +1,4 @@
 PATH=$PATH:~/bin
-export GOPATH=$HOME/go_hm
-export GOROOT=/usr/local/opt/go/libexec
 export EDITOR='vim'
 
 # Enable autocompletion for Paperspace/Gradient cli.
@@ -192,3 +190,4 @@ tmux_gpu_session() {
         tmux select-window -t main:1
         tmux attach -t main
 }
+
