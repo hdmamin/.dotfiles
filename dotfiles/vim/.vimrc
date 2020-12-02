@@ -17,10 +17,7 @@ set expandtab
 set softtabstop=4
 set tabstop=4
 
-" Expand tabs to spaces.
-set et
-
-" Indent 4 spaces when using ">>" command. Requires "set et".
+" Indent 4 spaces when using ">>" command. 
 set shiftwidth=4
 
 " Indent to next line when writing code
