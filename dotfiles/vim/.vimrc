@@ -37,7 +37,7 @@ set incsearch
 let python_highlight_all = 1
 
 " Vim-Plug plugins. Use command:
-" :PlugInstall
+" :PlugInstall to install packages the first time, :PlugUpdate to update packages
 call plug#begin('~/.vim/plugged')
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'scrooloose/nerdtree'
@@ -62,6 +62,9 @@ let g:pymode_syntax_space_errors = 0
 let g:pymode_folding = 0
 let g:pymode_folding_auto = 0
 let g:pymode_lint_ignore = ["W391"]
+
+# Make vim-buftabline show buffer numbers next to names.
+let g:buftabline_numbers = 1
 
 syntax enable
 
