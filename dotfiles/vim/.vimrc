@@ -63,7 +63,7 @@ let g:pymode_folding = 0
 let g:pymode_folding_auto = 0
 let g:pymode_lint_ignore = ["W391"]
 
-# Make vim-buftabline show buffer numbers next to names.
+" Make vim-buftabline show buffer numbers next to names.
 let g:buftabline_numbers = 1
 
 syntax enable

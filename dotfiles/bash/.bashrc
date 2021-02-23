@@ -1,9 +1,6 @@
 PATH=$PATH:~/bin
 export EDITOR='vim'
 
-# Enable autocompletion for Paperspace/Gradient cli.
-. ~/.paperspace/paperspace_complete.sh
-
 alias chrome="open -a 'Google Chrome'"
 alias ls='ls -Ghp'
 alias mv='mv -i'
@@ -109,11 +106,6 @@ start_jupyter() {
         echo "${id} ${token}"
 }
 
-start_paperspace() {
-        # Simpler version of start_jupyter() for paperspace. Eventually might refactor into 1 function but for now simpler to keep as is.
-        nohup jupyter notebook --port=8889 --no-browser > /dev/null 2>&1 &
-}
-
 connect_jupyter() {
         # First argument is instance id (starts with "i-"), second argument is jupyter token.
         # This is the string output by `start_jupyter` on ec2.
@@ -123,12 +115,6 @@ connect_jupyter() {
         url=http://localhost:8000/tree/?token=$2
         echo $url 
         chrome $url
-}
-
-connect_paperspace() {
-        # Takes zero arguments, unlike connect_jupyter(). Need to use 127.0.0.1 instead of localhost for some reason.
-        ssh -X -N -f -L 8000:127.0.0.1:8889 paperspace@64.62.255.51
-        chrome http://localhost:8000/tree 
 }
 
 enable_jupyter_extensions() {
