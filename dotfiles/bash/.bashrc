@@ -60,6 +60,9 @@ txtrst='\e[0m'    # Text Reset - Useful for avoiding color bleed
 # Sets prompt colors and information.
 export PS1="\[$bldblu\]\u@\h \[$bldgrn\]\w\[$txtblu\]\$(parse_git_branch) $ \[$txtrst\]"
 
+# Makes .bash_history (or `history` command) include timestamps.
+HISTTIMEFORMAT="%F %T "
+
 # Allow vim bindings in bash. Use "shopt -os vi" to unset.
 set -o vi
 
