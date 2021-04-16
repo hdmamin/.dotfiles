@@ -1,8 +1,5 @@
-PATH=$PATH:~/bin
+PATH=$PATH:~/bin:/usr/local/go/bin:/usr/local/Cellar/terraform/0.12.12/bin/terraform:/usr/local/bin
 export EDITOR='vim'
-
-# Enable autocompletion for Paperspace/Gradient cli.
-. ~/.paperspace/paperspace_complete.sh
 
 alias chrome="open -a 'Google Chrome'"
 alias ls='ls -Ghp'
@@ -62,8 +59,7 @@ txtrst='\e[0m'    # Text Reset - Useful for avoiding color bleed
 
 export PS1="\[$bldblu\]\u@\h \[$bldgrn\]\w\[$txtblu\]\$(parse_git_branch) $ \[$txtrst\]"
 
-# Use `config` command like `git` to help deal with bare repo ~/dotfiles. 
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+export HISTTIMEFORMAT="%F %T "
 
 # Allow vim bindings in bash. Use "shopt -os vi" to unset.
 set -o vi
@@ -102,13 +98,22 @@ kill_port() {
 start_jupyter() {
         # Run from ec2 to start headless Jupyter. Outputs instance ID and jupyter auth token. You can copy this
         # output, then run `connect_jupyter cmd-v` locally to connect.
-        nohup jupyter notebook --no-browser > /dev/null 2>&1 &
+        nohup jupyter-notebook --ip=0.0.0.0 --no-browser > /dev/null 2>&1 &
         # Old version used IP address but GG security policy changed. Keep for now just in case.
         # ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
         id=$(wget -qO- http://169.254.169.254/latest/meta-data/instance-id)
         sleep 2
         token=$(jupyter notebook list | grep -oP '(?<=token=)[\w\d]*')
         echo "${id} ${token}"
+}
+
+start_jupyter_gg() {
+        # Run from ec2 to start headless Jupyter. Outputs URL which can be pasted into a web browser to access session.
+        nohup jupyter lab --ip=0.0.0.0 --no-browser > /dev/null 2>&1 &
+        ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+        sleep 2
+        token=$(jupyter notebook list | grep -oP '(?<=token=)[\w\d]*')
+        echo "http://${ip}:8888/?token=${token}"
 }
 
 start_paperspace() {
@@ -190,4 +195,42 @@ tmux_gpu_session() {
         tmux select-window -t main:1
         tmux attach -t main
 }
+
+pylog() {
+        # Prints stdout and also saves output to a file.
+        # Arg 1: python script to run
+        # Arg 2: Log file to save stdout to.
+        # Ex: pylog myscript.py data/logs/train.log
+        python -u $1 2>&1 | tee $2
+}
+
+#-------------------
+# GoGuardian
+#-------------------
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Data Science knowledge repo
+export KNOWLEDGE_REPO="KRDatascience"
+
+# Function to get the private IP of an instance
+get_private_ip() {
+	echo $(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
+}
+
+# A few bash functions to smooth running jupyter notebooks on ec2.
+# get_running_jupyter_servers prints out every running jupyter server on an instance at the private ip.
+# Function to print out all running jupyter servers in Docker
+get_running_jupyter_servers() {
+	for cid in $(docker ps -aq)
+	do
+                if [ "$USER" == "ubuntu" ]; then
+                        local privateip=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
+                else
+                        local privateip="localhost"
+                fi
+                local serverstr=$(docker exec $cid jupyter notebook list | grep -E "http")
+		local extserverstr=${serverstr:14:61}
+		echo http://$privateip$extserverstr
+	done
 
