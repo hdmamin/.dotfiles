@@ -118,8 +118,6 @@ start_jupyter_gg() {
         echo "http://${ip}:8888/?token=${token}"
 }
 
-=======
->>>>>>> 4e419cdc5bb3c3cbca7ac08cf3ddfde2411ebd33
 connect_jupyter() {
         # First argument is instance id (starts with "i-"), second argument is jupyter token.
         # This is the string output by `start_jupyter` on ec2.
