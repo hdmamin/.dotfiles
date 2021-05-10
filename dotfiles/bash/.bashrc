@@ -100,7 +100,7 @@ kill_port() {
 start_jupyter() {
         # Run from ec2 to start headless Jupyter. Outputs instance ID and jupyter auth token. You can copy this
         # output, then run `connect_jupyter cmd-v` locally to connect.
-        nohup jupyter notebook --no-browser > /dev/null 2>&1 &
+        nohup jupyter-notebook --ip=0.0.0.0 --no-browser > /dev/null 2>&1 &
         # Old version used IP address but GG security policy changed. Keep for now just in case.
         # ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
         id=$(wget -qO- http://169.254.169.254/latest/meta-data/instance-id)
