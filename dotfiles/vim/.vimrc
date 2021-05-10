@@ -15,8 +15,9 @@ set expandtab
 
 " Number of spaces to delete when hitting backspace after a tab
 set softtabstop=4
+set tabstop=4
 
-" Make indents using ">>" match tab indent size.
+" Make indents using ">>" match tab indent size (4 spaces).
 set shiftwidth=4
 
 " Indent to next line when writing code
@@ -36,7 +37,7 @@ set incsearch
 let python_highlight_all = 1
 
 " Vim-Plug plugins. Use command:
-" :PlugInstall
+" :PlugInstall to install packages the first time, :PlugUpdate to update packages
 call plug#begin('~/.vim/plugged')
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'scrooloose/nerdtree'
