@@ -17,7 +17,7 @@ set expandtab
 set softtabstop=4
 set tabstop=4
 
-" Indent 4 spaces when using ">>" command. 
+" Make indents using ">>" match tab indent size (4 spaces).
 set shiftwidth=4
 
 " Indent to next line when writing code
