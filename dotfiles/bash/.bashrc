@@ -19,6 +19,7 @@ alias tm=task_modify
 alias te=task_edit
 alias ta=task_add
 alias dr='docker rm $(docker ps -aq)'
+alias vcurl='curl -w "\n\n==== cURL measurements stats ====\ntotal: %{time_total} seconds \nsize: %{size_download} bytes \ndnslookup: %{time_namelookup} seconds \nconnect: %{time_connect} seconds \nappconnect: %{time_appconnect} seconds \nredirect: %{time_redirect} seconds \npretransfer: %{time_pretransfer} seconds \nstarttransfer: %{time_starttransfer} seconds \ndownloadspeed: %{speed_download} byte/sec \nuploadspeed: %{speed_upload} byte/sec \n\n"'
 
 # Update title of terminal tab to reflect current directory. 
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
@@ -185,4 +186,13 @@ pylog() {
         # Ex: pylog myscript.py data/logs/train.log
         python -u $1 2>&1 | tee $2
 }
+
+jabber() {
+    cd ~/jabberwocky
+    make run
+}
+
+
+export PATH="/Users/hmamin/.deta/bin:$PATH"
+export PATH="/usr/local/Cellar/node/22.4.0/bin:$PATH"
 

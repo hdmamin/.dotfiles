@@ -1,3 +1,5 @@
+" Reload vimrc from this file with :source %
+
 " Show line numbers
 set number
 
@@ -47,6 +49,9 @@ Plug 'tpope/vim-surround'   " Highlight text, then use S-char to surround w/ cha
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'kalekundert/vim-coiled-snake'   " Better docstring folding.
 Plug 'Konfekt/FastFold'
+" Codex code completion. Disabled because I get an openai ImportError when
+" opening vim even though openai is installed.
+" Plug 'tom-doerr/vim_codex'
 call plug#end()
 
 " By default, fold docstrings but nothing else.
@@ -80,7 +85,11 @@ nnoremap <C-k> :m .-2<CR>==
 set mouse=a
 
 " Underline the current line with dashes in normal mode
-nnoremap <F5> yyp<c-v>$r-
+" Set this to f5 for a long time but that seemed to stop working on personal
+" laptop, maybe after ventura update? Now set to ctrl + lowercase L (for
+" "underLine; initially tried ctrl + u but that seems to do weird things to
+" the undo command).
+nnoremap <C-l> yyp<c-v>$r-
 
 " Copy highlighted text to clipboard with '' (2 single quotes)
 vmap '' :w !pbcopy<CR><CR>
