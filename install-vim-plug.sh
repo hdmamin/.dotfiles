@@ -11,3 +11,5 @@ else
     echo "tmux plugin manager already found"
 fi
 
+# Enable vim settings and plugins. Must occur AFTER we've gnu-stowed everything.
+vim -c "source ~/.vimrc" -c "PlugInstall" -c "qa"

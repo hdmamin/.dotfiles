@@ -40,6 +40,7 @@ let python_highlight_all = 1
 
 " Vim-Plug plugins. Use command:
 " :PlugInstall to install packages the first time, :PlugUpdate to update packages
+" (This will only work if you've already called :source ~/.vimrc)
 call plug#begin('~/.vim/plugged')
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'scrooloose/nerdtree'
