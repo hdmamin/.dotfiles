@@ -106,3 +106,9 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Look for tags in file directory and work backwards to home directory.
 set tags=./tags,tags;$HOME
+
+" Dump whatever is copied to the default register (stuff you've yanked with y
+" or yy) to /tmp/cp.txt. Useful when using vim in tmux on a remote vm.
+" Call with ctrl+p in normal mode (recommended) or :Dump in command mode.
+command! Dump call writefile([@"], "/tmp/cp.txt")
+nnoremap <C-p> :Dump<CR>
